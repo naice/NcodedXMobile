@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Controls\RepeaterView.cs" />
     <Compile Include="InvalidConfigurationException.cs" />
     <Compile Include="Converter\IConverter.cs" />
     <Compile Include="Converter\IJsonConvert.cs" />
