@@ -32,8 +32,9 @@ namespace NcodedXMobile.Model
 
         public Storage(string name, IStorageIO storageIO, IConverter converter)
         {
-            _name = name ?? throw new ArgumentException("No file name set.", nameof(name));
-            _storageIO = storageIO ?? throw new ArgumentException("Unable to run Storage", nameof(storageIO));
+            _name = name ?? throw new ArgumentException(nameof(name));
+            _storageIO = storageIO ?? throw new ArgumentException(nameof(storageIO));
+            _converter = converter ?? throw new ArgumentException(nameof(converter));
         }
 
         private async Task UnsafeOpen()
