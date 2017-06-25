@@ -18,6 +18,15 @@ namespace NcodedXMobile.UWP.Renderer
     public class BlendImageViewRenderer : ViewRenderer<BlendImageView, BitmapIcon>
     {
         private bool _isDisposed;
+        private Windows.UI.Color BlendColor {
+            get {
+                var c = Element.BlendColor;
+                return
+                    Windows.UI.Color.FromArgb(
+                    (byte)(c.A * 255d), (byte)(c.R * 255d), (byte)(c.G * 255d), (byte)(c.B * 255d));
+
+            }
+        }
 
         public BlendImageViewRenderer()
         {
@@ -39,7 +48,7 @@ namespace NcodedXMobile.UWP.Renderer
             base.OnElementChanged(e);
             if (e.OldElement == null)
             {
-                SetNativeControl(new BitmapIcon());
+                SetNativeControl(new BitmapIcon() { Foreground=new SolidColorBrush(BlendColor) });
             }
             UpdateBitmap(e.OldElement);
         }
@@ -61,10 +70,7 @@ namespace NcodedXMobile.UWP.Renderer
         {
             if (!_isDisposed)
             {
-                var c = Element.BlendColor;
-                Control.Foreground = new SolidColorBrush(
-                    Windows.UI.Color.FromArgb(
-                    (byte)(c.A * 255d), (byte)(c.R * 255d), (byte)(c.G * 255d), (byte)(c.B * 255d)));
+                Control.Foreground = new SolidColorBrush(BlendColor);
             }
         }
         private void UpdateBitmap(BlendImageView previous = null)
